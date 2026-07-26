@@ -14051,3 +14051,30 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 143207,100101,,de_overpass,2,13.0,9.0,HEROIC,M80,finished
 143208,100100,,de_nuke,2,13.0,8.0,Legacy,NRG,finished
 143210,100100,,de_dust2,3,13.0,5.0,Legacy,NRG,finished
+178776,124990,2026-07-26T15:39:03.000+00:00,de_inferno,2,13.0,9.0,The Mongolz,WILDCARDcs2,finished
+178777,124990,2026-07-26T14:38:15.000+00:00,de_dust2,1,13.0,7.0,The Mongolz,WILDCARDcs2,finished
+178773,124989,2026-07-26T13:24:46.000+00:00,de_ancient,2,13.0,9.0,3DMAX,FUT Esports,finished
+178774,124989,2026-07-26T12:15:08.000+00:00,de_dust2,1,13.0,11.0,3DMAX,FUT Esports,finished
+178770,124988,2026-07-26T10:56:33.000+00:00,de_mirage,2,16.0,14.0,paiN Gaming,Ninjas in Pyjamas,finished
+178771,124988,2026-07-26T10:01:38.000+00:00,de_nuke,1,13.0,6.0,paiN Gaming,Ninjas in Pyjamas,finished
+178767,124987,2026-07-25T18:45:17.000+00:00,de_mirage,2,13.0,8.0,MOUZ,FOKUS,finished
+178768,124987,2026-07-25T17:30:27.000+00:00,de_dust2,1,13.0,10.0,MOUZ,FOKUS,finished
+178763,124986,2026-07-25T16:25:39.000+00:00,de_ancient,3,13.0,10.0,Astralis,HOTU,finished
+178764,124986,2026-07-25T15:34:37.000+00:00,de_nuke,2,13.0,7.0,HOTU,Astralis,finished
+178765,124986,2026-07-25T14:47:45.000+00:00,de_cache,1,13.0,1.0,Astralis,HOTU,finished
+178761,124985,2026-07-25T13:50:32.000+00:00,de_mirage,2,13.0,5.0,Liquid,G2 Esports CS2,finished
+178762,124985,2026-07-25T12:53:31.000+00:00,de_anubis,1,13.0,6.0,Liquid,G2 Esports CS2,finished
+178757,124984,2026-07-25T11:55:29.000+00:00,de_cache,3,13.0,7.0,FaZe Clan,DENDELE,finished
+178758,124984,2026-07-25T10:46:16.000+00:00,de_mirage,2,13.0,10.0,DENDELE,FaZe Clan,finished
+178759,124984,2026-07-25T10:01:15.000+00:00,de_nuke,1,13.0,2.0,FaZe Clan,DENDELE,finished
+178754,124983,2026-07-24T20:26:20.000+00:00,de_cache,3,16.0,14.0,DENDELE,FURIA,finished
+178755,124983,2026-07-24T19:28:32.000+00:00,de_mirage,2,13.0,6.0,FURIA,DENDELE CS,finished
+178756,124983,2026-07-24T18:05:01.000+00:00,de_anubis,1,13.0,6.0,DENDELE,FURIA,finished
+178752,124982,2026-07-24T17:01:58.000+00:00,de_nuke,2,13.0,9.0,Liquid,Team Vitality,finished
+178753,124982,2026-07-24T15:54:20.000+00:00,de_anubis,1,13.0,10.0,Liquid,Team Vitality,finished
+178748,124981,2026-07-24T14:12:10.000+00:00,de_dust2,3,19.0,16.0,The Mongolz,HEROIC,finished
+178749,124981,2026-07-24T13:09:47.000+00:00,de_cache,2,13.0,8.0,The Mongolz,HEROIC,finished
+178750,124981,2026-07-24T12:19:08.000+00:00,de_nuke,1,13.0,5.0,HEROIC,The Mongolz,finished
+178745,124980,2026-07-24T11:24:45.000+00:00,de_dust2,3,13.0,6.0,3DMAX,magic,finished
+178746,124980,2026-07-24T09:59:30.000+00:00,de_ancient,2,16.0,14.0,3DMAX,magic,finished
+178747,124980,2026-07-24T09:02:17.000+00:00,de_cache,1,13.0,7.0,magic,3DMAX,finished
