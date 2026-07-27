@@ -14078,3 +14078,6 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 178745,124980,2026-07-24T11:24:45.000+00:00,de_dust2,3,13.0,6.0,3DMAX,magic,finished
 178746,124980,2026-07-24T09:59:30.000+00:00,de_ancient,2,16.0,14.0,3DMAX,magic,finished
 178747,124980,2026-07-24T09:02:17.000+00:00,de_cache,1,13.0,7.0,magic,3DMAX,finished
+178778,124991,2026-07-26T18:50:53.000+00:00,de_dust2,3,13.0,0.0,Team Spirit,100T,finished
+178779,124991,2026-07-26T17:58:50.000+00:00,de_mirage,2,13.0,4.0,100T,Team Spirit,finished
+178780,124991,2026-07-26T16:44:10.000+00:00,de_anubis,1,13.0,11.0,Team Spirit,100T,finished
