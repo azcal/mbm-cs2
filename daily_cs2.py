@@ -15,6 +15,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import log_loss, brier_score_loss
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+import tg_delta
 H = {"User-Agent": "Mozilla/5.0"}
 API = "https://api.bo3.gg/api/v1"
 MATCHES = os.path.join(HERE, "data", "matches.csv")
@@ -304,15 +305,20 @@ def run():
           "with a prediction range topping out below its own base rate.")
 
     tg, ch = os.environ.get("TG_TOKEN"), os.environ.get("TG_CHAT")
-    if tg and ch and (up or alerts):
-        txt = "\n".join(
-            f"{r['team1']} vs {r['team2']}: {r['p_team1']:.3f} | "
-            f"{r['team1']} >= {min_odds(r['p_team1']):.2f} / {r['team2']} >= {min_odds(1-r['p_team1']):.2f}"
-            for r in rows) if up else "no upcoming matches"
-        if alerts:
-            txt += "\n\u26a0 TRIPWIRE: " + ", ".join(alerts) + " below base rate, stop betting this board"
-        requests.post(f"https://api.telegram.org/bot{tg}/sendMessage",
-                      data={"chat_id": ch, "text": f"MBM CS2\n{txt}"}, timeout=20)
+    if tg and ch:
+        push = {r["match_id"]: {"line": (f"{r['team1']} vs {r['team2']}: {r['p_team1']:.3f} | "
+                                         f"{r['team1']} >= {min_odds(r['p_team1']):.2f} / "
+                                         f"{r['team2']} >= {min_odds(1-r['p_team1']):.2f}"),
+                                "min_odds": min_odds(r["p_team1"])} for r in rows} if up else {}
+        mode, lines = tg_delta.gate(LOGS, dt.date.today().strftime("%Y%m%d"), push)
+        if lines or alerts:
+            txt = "\n".join(lines) if lines else "no price changes since the last push"
+            if mode == "delta" and lines:
+                txt = "changes since the last push:\n" + txt
+            if alerts:
+                txt += "\n\u26a0 TRIPWIRE: " + ", ".join(alerts) + " below base rate, stop betting this board"
+            requests.post(f"https://api.telegram.org/bot{tg}/sendMessage",
+                          data={"chat_id": ch, "text": f"MBM CS2\n{txt}"}, timeout=20)
 
 
 if __name__ == "__main__":
