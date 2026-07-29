@@ -313,11 +313,11 @@ def run():
                    r["team1"] if r["p_team1"] >= .5 else r["team2"],
                    max(r["p_team1"], 1 - r["p_team1"]), r["match_id"]) for r in rows]
             wg = max([len(x[1]) for x in bd] + [10]); wp = max([len(x[2]) for x in bd] + [8])
-            for dt, gm, pk, q, gid in bd:
+            for d_, gm, pk, q, gid in bd:
                 if BF.min_odds(q) < BF.PRICE_FLOOR:
                     skipped += 1
                     continue
-                push[gid] = {"line": BF.line(dt, gm, pk, q, w_game=wg, w_pick=wp),
+                push[gid] = {"line": BF.line(d_, gm, pk, q, w_game=wg, w_pick=wp),
                              "min_odds": BF.min_odds(q)}
         mode, lines = tg_delta.gate(LOGS, dt.date.today().strftime("%Y%m%d"), push)
         if lines or alerts:
