@@ -17,6 +17,7 @@ from sklearn.metrics import log_loss, brier_score_loss
 HERE = os.path.dirname(os.path.abspath(__file__))
 import tg_delta
 import board_format as BF
+import notify
 H = {"User-Agent": "Mozilla/5.0"}
 API = "https://api.bo3.gg/api/v1"
 MATCHES = os.path.join(HERE, "data", "matches.csv")
@@ -305,8 +306,7 @@ def run():
           "+0.0009 log loss over base rate (t=0.27, p=0.39, AUC 0.5241) on n=623, "
           "with a prediction range topping out below its own base rate.")
 
-    tg, ch = os.environ.get("TG_TOKEN"), os.environ.get("TG_CHAT")
-    if tg and ch:
+    if True:
         push, skipped = {}, 0
         if up:
             bd = [(str(r["ts"])[:10], f"{r['team1']} vs {r['team2']}",
@@ -321,16 +321,18 @@ def run():
                              "min_odds": BF.min_odds(q)}
         mode, lines = tg_delta.gate(LOGS, dt.date.today().strftime("%Y%m%d"), push)
         if lines or alerts:
-            txt = "\n".join(lines) if lines else "no price changes since the last push"
-            if skipped:
-                txt += f"\n({skipped} game{'s' if skipped != 1 else ''} skipped, "\
-                       f"price floor {BF.PRICE_FLOOR:.2f} / {BF.american(BF.PRICE_FLOOR)})"
-            if mode == "delta" and lines:
-                txt = "changes since the last push:\n" + txt
+            body = list(lines) if lines else ["no price changes since the last push"]
+            foot = (f"{skipped} game{'s' if skipped != 1 else ''} skipped, "
+                    f"price floor {BF.PRICE_FLOOR:.2f} / {BF.american(BF.PRICE_FLOOR)}")\
+                   if skipped else None
+            title = "MBM CS2" + (" · changes since the last push"
+                                     if mode == "delta" and lines else "")
+            colour = notify.GREEN
             if alerts:
-                txt += "\n\u26a0 TRIPWIRE: " + ", ".join(alerts) + " below base rate, stop betting this board"
-            requests.post(f"https://api.telegram.org/bot{tg}/sendMessage",
-                          data={"chat_id": ch, "text": f"MBM CS2\n{txt}"}, timeout=20)
+                body = body + ["", "TRIPWIRE: " + ", ".join(alerts)
+                               + " below base rate, stop betting this board"]
+                colour = notify.RED
+            notify.send(title, body, foot, colour)
 
 
 if __name__ == "__main__":
