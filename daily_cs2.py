@@ -261,7 +261,6 @@ def run():
         pd.DataFrame(columns=["ts", "match_id", "team1", "team2", "p_team1", "p_elo", "model"])
 
     if up:
-        print("\n=== MBM CS2 board (Bo3, next 48h) ===")
         for x in up:
             gp = elo[x["team1_id"]] - elo[x["team2_id"]]
             pw = mw.predict_proba([[gp]])[0, 1]
@@ -319,6 +318,13 @@ def run():
                     continue
                 push[gid] = {"line": BF.line(d_, gm, pk, q, w_game=wg, w_pick=wp),
                              "min_odds": BF.min_odds(q)}
+        print("\n=== MBM CS2 board ===")
+        for _v in push.values():
+            print(_v["line"])
+        if skipped:
+            print(f"({skipped} match{{'s' if skipped != 1 else ''}} skipped, "
+                  f"price floor {{BF.PRICE_FLOOR:.2f}} / {{BF.american(BF.PRICE_FLOOR)}})")
+
         mode, lines = tg_delta.gate(LOGS, dt.date.today().strftime("%Y%m%d"), push)
         if lines or alerts:
             body = list(lines) if lines else ["no price changes since the last push"]
