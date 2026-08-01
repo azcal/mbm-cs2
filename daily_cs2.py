@@ -4,20 +4,35 @@ MBM CS2 daily runner (rebuild v2, frozen spec).
 - Elo: round-margin (MOV) updates where map data exists, map-count elsewhere
 - Fits the frozen winner head (train <= 2025; rest of 2026 = forward test)
 - Auto-discovers upcoming Bo3 matches (48h horizon), boards p(win)
+- Discord push routed through tg_delta so refreshes only report what moved
 - Grades all logged predictions, prints rolling metrics + tripwire
 - Series-length head RETIRED 2026-07-26 (see NOTES); no longer computed or boarded
 Usage: python daily_cs2.py
 """
-import json, os, datetime as dt
+import json, os, sys, datetime as dt
 import numpy as np, pandas as pd, requests
 from collections import defaultdict, Counter
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import log_loss, brier_score_loss
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
 import tg_delta
 import board_format as BF
 import notify
+
+# Shared files must be at least this new. A minimum rather than an exact match, so a
+# later improvement to a shared file does not force an edit in every runner. Raise it
+# only when a change is one this runner actually depends on.
+#   2026-08-03  board_format.line() field separator, without which the widest row on
+#               every board renders as an unstyled run-on line.
+SHARED_MIN = "2026-08-03"
+for _mod in (BF, notify, tg_delta):
+    _have = getattr(_mod, "VERSION", "")
+    if _have < SHARED_MIN:
+        raise ImportError(
+            f"{_mod.__name__}.py is version {_have or 'unstamped'}, this runner needs "
+            f"{SHARED_MIN} or newer. Copy the current shared files into this repo.")
 H = {"User-Agent": "Mozilla/5.0"}
 API = "https://api.bo3.gg/api/v1"
 MATCHES = os.path.join(HERE, "data", "matches.csv")
@@ -305,41 +320,46 @@ def run():
           "+0.0009 log loss over base rate (t=0.27, p=0.39, AUC 0.5241) on n=623, "
           "with a prediction range topping out below its own base rate.")
 
-    if True:
-        push, skipped = {}, 0
-        if up:
-            bd = [(str(r["ts"])[:10], f"{r['team1']} vs {r['team2']}",
-                   r["team1"] if r["p_team1"] >= .5 else r["team2"],
-                   max(r["p_team1"], 1 - r["p_team1"]), r["match_id"]) for r in rows]
-            wg = max([len(x[1]) for x in bd] + [10]); wp = max([len(x[2]) for x in bd] + [8])
-            for d_, gm, pk, q, gid in bd:
-                if BF.min_odds(q) < BF.PRICE_FLOOR:
-                    skipped += 1
-                    continue
-                push[gid] = {"line": BF.line(d_, gm, pk, q, w_game=wg, w_pick=wp),
-                             "min_odds": BF.min_odds(q)}
-        print("\n=== MBM CS2 board ===")
-        for _v in push.values():
-            print(_v["line"])
-        if skipped:
-            print(f"({skipped} match{{'s' if skipped != 1 else ''}} skipped, "
-                  f"price floor {{BF.PRICE_FLOOR:.2f}} / {{BF.american(BF.PRICE_FLOOR)}})")
+    push, skipped = {}, 0
+    if up:
+        bd = [(str(r["ts"])[:10], f"{r['team1']} vs {r['team2']}",
+               r["team1"] if r["p_team1"] >= .5 else r["team2"],
+               max(r["p_team1"], 1 - r["p_team1"]), r["match_id"]) for r in rows]
+        wg = max([len(x[1]) for x in bd] + [10]); wp = max([len(x[2]) for x in bd] + [8])
+        for d_, gm, pk, q, gid in bd:
+            if BF.min_odds(q) < BF.PRICE_FLOOR:
+                skipped += 1
+                continue
+            push[gid] = {"line": BF.line(d_, gm, pk, q, w_game=wg, w_pick=wp),
+                         "min_odds": BF.min_odds(q),
+                         # Lets the gate report a changed matchup under the same bo3.gg
+                         # id, which happens when a bracket slot resolves late.
+                         "match": gm}
+    print("\n=== MBM CS2 board ===")
+    for _v in push.values():
+        print(_v["line"])
+    if skipped:
+        print(f"({skipped} match{'es' if skipped != 1 else ''} skipped, "
+              f"price floor {BF.PRICE_FLOOR:.2f} / {BF.american(BF.PRICE_FLOOR)})")
 
-        mode, lines = tg_delta.gate(LOGS, dt.date.today().strftime("%Y%m%d"), push)
-        if lines or alerts:
-            body = list(lines) if lines else ["no price changes since the last push"]
-            foot = (f"{skipped} game{'s' if skipped != 1 else ''} skipped, "
-                    f"price floor {BF.PRICE_FLOOR:.2f} / {BF.american(BF.PRICE_FLOOR)}")\
-                   if skipped else None
-            title = "MBM CS2" + (" · changes since the last push"
-                                     if mode == "delta" and lines else "")
-            colour = notify.GREEN
-            if alerts:
-                body = body + ["", "TRIPWIRE: " + ", ".join(alerts)
-                               + " below base rate, stop betting this board"]
-                colour = notify.RED
-            notify.send(title, body, foot, colour)
-
+    mode, lines = tg_delta.gate(LOGS, dt.date.today().strftime("%Y%m%d"), push)
+    if lines or alerts:
+        body = list(lines) if lines else ["no price changes since the last push"]
+        foot = (f"{skipped} match{'es' if skipped != 1 else ''} skipped, "
+                f"price floor {BF.PRICE_FLOOR:.2f} / {BF.american(BF.PRICE_FLOOR)}")\
+               if skipped else None
+        title = "MBM CS2" + (" · changes since the last push"
+                             if mode == "delta" and lines else "")
+        colour = notify.GREEN
+        if alerts:
+            body = body + ["", "TRIPWIRE: " + ", ".join(alerts)
+                           + " below base rate, stop betting this board"]
+            colour = notify.RED
+        notify.send(title, body, foot, colour)
+    elif not push:
+        print("no board to send")
+    else:
+        print("board unchanged since the last push, nothing sent")
 
 if __name__ == "__main__":
     run()
