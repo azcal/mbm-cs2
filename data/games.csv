@@ -14098,3 +14098,7 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 178797,124998,2026-08-01T16:24:38.000+00:00,de_dust2,3,13.0,9.0,MOUZ,Astralis,finished
 178798,124998,2026-08-01T15:17:55.000+00:00,de_mirage,2,13.0,9.0,MOUZ,Astralis,finished
 178799,124998,2026-08-01T14:16:14.000+00:00,de_ancient,1,13.0,6.0,Astralis,MOUZ,finished
+178801,124999,2026-08-02T13:46:52.000+00:00,de_nuke,4,13.0,10.0,MOUZ,Spirit,finished
+178802,124999,2026-08-02T12:33:56.000+00:00,de_ancient,3,13.0,9.0,Spirit,MOUZ,finished
+178803,124999,2026-08-02T11:40:41.000+00:00,de_mirage,2,13.0,4.0,MOUZ,Spirit,finished
+178804,124999,2026-08-02T10:31:18.000+00:00,de_dust2,1,13.0,8.0,MOUZ,Spirit,finished
