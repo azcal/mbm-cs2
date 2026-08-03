@@ -45,6 +45,33 @@ KR = SPEC.get("Kr", 14.0)          # per-map MOV update rate
 
 MIN_EDGE = 0.05  # required margin: threshold odds pay 5% above model breakeven
 
+# Series formats the board prices. The winner head is still fit on Bo3 ONLY (see
+# fit_head), so admitting Bo5 cannot move a single Bo3 number.
+#
+# Measured on 97 tier-S/A Bo5 series, 2020-2026, every one of them a grand final and
+# exactly one per tournament. All are out of sample for a Bo3-fit head:
+#
+#   base rate                LL 0.7119
+#   raw Elo                  LL 0.6474
+#   Bo3 head as-is           LL 0.6521   hit 65.0%   AUC 0.6813
+#   Bo3 head recompounded    LL 0.6590   hit 65.0%   AUC 0.6813
+#     (invert P(Bo3) to a per-map q, then re-expand to Bo5)
+#
+# The head beats base rate by +0.0598 on Bo5 against +0.0577 on the 2026 Bo3 holdout, so
+# the point estimate transfers almost exactly. It is not significant at n=80 (t=1.64,
+# p=0.11) and will not be for years at roughly sixteen finals a season.
+#
+# Recompounding through the map probability was tried and made it worse. So did every
+# Bo5-specific correction: team1's listing edge reads 0.454 on Bo5 against 0.553 on Bo3,
+# but year by year it runs 0.0, 0.0, 0.667, 0.583, 0.294 on samples of five to twenty-four.
+# That is noise around a coin, not a structure worth fitting. AUC is identical across all
+# variants because they are monotone transforms of the same gap, so ranking is unaffected
+# either way and only calibration was ever in question.
+#
+# Bo5 rows are tagged in the log so they grade as their own series rather than diluting
+# the Bo3 record.
+BOARDED_BO = (3, 5)
+
 def min_odds(p):
     import math
     p = min(max(float(p), 0.01), 0.99)
@@ -217,6 +244,12 @@ def compute_elo(m, by_mid):
 
 
 def fit_head(m, gaps):
+    """Winner head, fit on Bo3 ONLY.
+
+    This filter is the guarantee behind boarding Bo5. Bo5 series price through this head
+    but never enter it, so admitting them cannot move a Bo3 number by a thousandth. If
+    that ever stops being true, the Bo3 holdout stops meaning what it says.
+    """
     d = m.assign(gap=gaps)
     d = d[d.bo_type == 3].copy()
     d["y"] = (d.winner_team_id == d.team1_id).astype(int)
@@ -226,14 +259,25 @@ def fit_head(m, gaps):
 
 
 def fetch_upcoming(hours=48):
+    """Every upcoming tier-S/A series inside the horizon.
+
+    Queried by status and tier, never by tournament, so a new event appears on the next
+    run the moment bo3.gg publishes its matches with both teams assigned. Nothing needs
+    registering per event; this saw 48 distinct tournaments in the last year unprompted.
+
+    The limit was 40 and the horizon cut happens client-side afterward, so a busy event
+    truncated the far end of the board silently. The busiest rolling 48 hours in the last
+    year held 48 tier-S/A Bo3 series, and live matches sort first because their start time
+    is in the past, so 40 was already inside the range that binds.
+    """
     r = requests.get(f"{API}/matches", headers=H, timeout=60, params={
-        "page[limit]": 40, "sort": "start_date",
+        "page[limit]": 100, "sort": "start_date",
         "filter[matches.status][in]": "upcoming,current",
         "filter[matches.tier][in]": "s,a"}).json()
     out = []
     lim = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=hours)
     for x in r.get("results", []):
-        if x.get("bo_type") != 3 or not x.get("team1_id") or not x.get("team2_id"):
+        if x.get("bo_type") not in BOARDED_BO or not x.get("team1_id") or not x.get("team2_id"):
             continue
         try:
             ts = pd.Timestamp(x["start_date"])
@@ -273,7 +317,8 @@ def run():
     os.makedirs(LOGS, exist_ok=True)
     pred_path = os.path.join(LOGS, "predictions.csv")
     log = pd.read_csv(pred_path, dtype={"match_id": str}) if os.path.exists(pred_path) else \
-        pd.DataFrame(columns=["ts", "match_id", "team1", "team2", "p_team1", "p_elo", "model"])
+        pd.DataFrame(columns=["ts", "match_id", "team1", "team2", "p_team1", "p_elo",
+                              "bo", "model"])
 
     if up:
         for x in up:
@@ -282,8 +327,10 @@ def run():
             pe = 1 / (1 + 10 ** (-gp / 400))
             n1 = tn.get(int(x["team1_id"]), x["team1_id"])
             n2 = tn.get(int(x["team2_id"]), x["team2_id"])
+            bo = int(x.get("bo_type") or 3)
             rows.append({"ts": x["start_date"][:16], "match_id": str(x["id"]), "team1": n1,
-                         "team2": n2, "p_team1": pw, "p_elo": pe, "model": "v2-mov"})
+                         "team2": n2, "p_team1": pw, "p_elo": pe, "bo": bo,
+                         "model": "v2-mov" if bo == 3 else "v2-mov-bo5"})
             print(f"{x['start_date'][:16]}  {n1} vs {n2}  p({n1})={pw:.3f}  (elo {pe:.3f})  "
                   f"value: {n1} >= {min_odds(pw):.2f} / {n2} >= {min_odds(1-pw):.2f}")
         b = pd.DataFrame(rows)
@@ -297,6 +344,9 @@ def run():
     log.to_csv(pred_path, index=False)
 
     dec = log[log.y.notna()]
+    if "bo" not in dec.columns:
+        dec = dec.assign(bo=3)                      # rows logged before Bo5 was boarded
+    dec["bo"] = pd.to_numeric(dec.bo, errors="coerce").fillna(3).astype(int)
     if len(dec) >= 30:
         yw = dec.y.astype(int).values
         print(f"\nrolling grade (n={len(dec)}):")
@@ -305,12 +355,25 @@ def run():
             print(f"{lbl}: LL={log_loss(yw, pc):.4f}  Brier={brier_score_loss(yw, pc):.4f}  "
                   f"hit={np.mean((pc > .5) == (yw == 1)):.3f}  "
                   f"(base LL={log_loss(yw, np.full(len(yw), base_w)):.4f})")
-        w = dec.tail(200)
+        # Bo5 graded on its own. It is priced by a Bo3-fit head on an unvalidated
+        # extension, so folding it into the Bo3 record would hide both.
+        b5 = dec[dec.bo == 5]
+        if len(b5) >= 20:
+            yb = b5.y.astype(int).values
+            pb = np.clip(b5.p_team1.values.astype(float), 1e-6, 1-1e-6)
+            print(f"Bo5 only (n={len(b5)}): LL={log_loss(yb, pb):.4f}  "
+                  f"base={log_loss(yb, np.full(len(yb), base_w)):.4f}  "
+                  f"hit={np.mean((pb > .5) == (yb == 1)):.3f}")
+        elif (dec.bo == 5).any():
+            print(f"Bo5 forecast so far: {int((dec.bo == 5).sum())} graded, need 20 to report")
+
+        # The tripwire watches Bo3, which is what the head was fit and frozen on.
+        w = dec[dec.bo == 3].tail(200)
         if len(w) >= 200:
             yy = w.y.astype(int).values
             pp = np.clip(w.p_team1.values.astype(float), 1e-6, 1 - 1e-6)
             edge = log_loss(yy, np.full(len(yy), base_w)) - log_loss(yy, pp)
-            print(f"last-200 winner edge vs base: {edge:+.4f}  "
+            print(f"last-200 Bo3 winner edge vs base: {edge:+.4f}  "
                   f"[{'OK' if edge > 0 else 'TRIPWIRE: bench review'}]")
             if edge <= 0:
                 alerts.append("CS2 winner")
@@ -322,7 +385,10 @@ def run():
 
     push, skipped = {}, 0
     if up:
-        bd = [(str(r["ts"])[:10], f"{r['team1']} vs {r['team2']}",
+        # Bo5 is marked on the row itself, because it is the grand final and it is priced
+        # by a head fit on Bo3.
+        bd = [(str(r["ts"])[:10],
+               f"{r['team1']} vs {r['team2']}" + ("" if r.get("bo", 3) == 3 else " (Bo5)"),
                r["team1"] if r["p_team1"] >= .5 else r["team2"],
                max(r["p_team1"], 1 - r["p_team1"]), r["match_id"]) for r in rows]
         wg = max([len(x[1]) for x in bd] + [10]); wp = max([len(x[2]) for x in bd] + [8])
