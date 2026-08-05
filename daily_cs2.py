@@ -43,7 +43,10 @@ SPEC = json.load(open(os.path.join(HERE, "spec.json")))
 K = SPEC["K"]
 KR = SPEC.get("Kr", 14.0)          # per-map MOV update rate
 
-MIN_EDGE = 0.05  # required margin: threshold odds pay 5% above model breakeven
+# Tracks board_format rather than restating it. This is the console-side copy, and a
+# local 0.05 here while board_format ran at 0.00 meant the Actions log and Discord
+# quoted different prices for the same game.
+MIN_EDGE = BF.MIN_EDGE
 
 # Series formats the board prices. The winner head is still fit on Bo3 ONLY (see
 # fit_head), so admitting Bo5 cannot move a single Bo3 number.
