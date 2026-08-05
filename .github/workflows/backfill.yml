@@ -1,0 +1,65 @@
+name: backfill
+# One-off, manual only. Rewrites the seeded backfill rows in logs/predictions.csv so they
+# reflect the rating the board actually ships.
+#
+# Those 623 rows were produced by the retired map-count Elo. The board has used round-margin
+# (MOV) Elo since 2026-07-26, so the dashboard has been reporting a rating that no longer
+# runs. Nothing about the live board changes; only the historical rows are rewritten, and
+# only the ones tagged *-backfill. Live rows are left exactly as logged.
+#
+# Run it once, then you can leave this workflow in place or delete it. It has no schedule
+# and cannot fire on its own.
+#
+# Tick dry_run first if you want to see the numbers printed without anything being written.
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print the regenerated numbers without writing the file"
+        type: boolean
+        default: true
+permissions:
+  contents: write
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install pandas numpy scikit-learn requests pyarrow
+
+      - name: regenerate the backfill
+        run: |
+          set -e
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            python cs2_backfill.py --dry-run
+          else
+            python cs2_backfill.py
+          fi
+
+      - name: commit
+        if: ${{ inputs.dry_run == false }}
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add logs/predictions.csv
+          if git diff --cached --quiet; then
+            echo "nothing changed, not committing"
+            exit 0
+          fi
+          git commit -m "cs2: rebuild backfill on the MOV rating the board ships"
+          # Same push-collision retry the daily workflow uses: the cron run can land between
+          # our fetch and our push.
+          for i in 1 2 3 4 5; do
+            if git push -q; then
+              echo "pushed on attempt $i"
+              exit 0
+            fi
+            echo "remote moved, re-basing (attempt $i)"
+            git pull --rebase -q || true
+            sleep 3
+          done
+          echo "could not push after 5 attempts"
+          exit 1
