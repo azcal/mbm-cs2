@@ -401,9 +401,10 @@ def run():
                 continue
             push[gid] = {"line": BF.line(d_, gm, pk, q, w_game=wg, w_pick=wp),
                          "min_odds": BF.min_odds(q),
-                         # Lets the gate report a changed matchup under the same bo3.gg
-                         # id, which happens when a bracket slot resolves late.
-                         "match": gm}
+                         # Matchup AND side. The matchup alone catches a bracket slot
+                         # resolving late but not the model switching sides on a close
+                         # series, where the price can move less than the delta tolerance.
+                         "match": f"{pk} in {gm}"}
     print("\n=== MBM CS2 board ===")
     for _v in push.values():
         print(_v["line"])
