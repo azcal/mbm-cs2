@@ -275,10 +275,15 @@ def fetch_upcoming(hours=48):
     """
     r = requests.get(f"{API}/matches", headers=H, timeout=60, params={
         "page[limit]": 100, "sort": "start_date",
-        "filter[matches.status][in]": "upcoming,current",
+        # "upcoming" only. bo3.gg's "current" means the series is already being played,
+        # and a pre-match model has nothing useful to say about a map already under way.
+        # The start-time guard below also drops anything still marked upcoming whose
+        # scheduled time has passed.
+        "filter[matches.status][in]": "upcoming",
         "filter[matches.tier][in]": "s,a"}).json()
     out = []
-    lim = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=hours)
+    now = dt.datetime.now(dt.timezone.utc)
+    lim = now + dt.timedelta(hours=hours)
     for x in r.get("results", []):
         if x.get("bo_type") not in BOARDED_BO or not x.get("team1_id") or not x.get("team2_id"):
             continue
@@ -286,7 +291,7 @@ def fetch_upcoming(hours=48):
             ts = pd.Timestamp(x["start_date"])
         except Exception:
             continue
-        if ts <= lim:
+        if now < ts <= lim:
             out.append(x)
     return out
 
