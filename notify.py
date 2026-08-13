@@ -35,7 +35,7 @@ No webhook means nothing is sent, and the board still runs and grades.
 """
 import os, re, requests
 
-VERSION = "2026-08-09"
+VERSION = "2026-08-13"
 
 GREEN = 0x2E8B57      # normal board
 GREY = 0x8A8A8A       # calibration window, predictions only
@@ -60,7 +60,7 @@ LIVE_ANY = re.compile(r"^\s+or (live .+)$")
 # reject, and the row would fall through to the raw handler.
 # withdrawn included so a fixture dropping off the card renders as subtext
 # alongside the other change notes rather than as a stray code span.
-CHANGE = re.compile(r"^\s+(changed|new|withdrawn):\s*(.+)$")
+CHANGE = re.compile(r"^\s+(changed|new|withdrawn|closed):\s*(.+)$")
 
 
 def _flatten(lines):
