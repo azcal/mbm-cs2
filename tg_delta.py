@@ -28,7 +28,7 @@ import json, os
 
 import pandas as pd
 
-VERSION = "2026-08-13"
+VERSION = "2026-08-18"
 
 CACHE_NAME = "push_cache.json"
 DEFAULT_TOL = 0.02          # required-odds move that counts as news
@@ -44,7 +44,7 @@ def _load(path):
 
 
 def gate(logs_dir, datestr, board, tol=DEFAULT_TOL, cache_name=CACHE_NAME,
-         indent=MARK_INDENT, with_keys=False):
+         indent=MARK_INDENT, with_keys=False, report_gone=False):
     """Decide what to push.
 
     board: {key: {"line": <str to send>, "min_odds": <float>, "match": <optional str>}}
@@ -64,9 +64,22 @@ def gate(logs_dir, datestr, board, tol=DEFAULT_TOL, cache_name=CACHE_NAME,
     # Without it a refresh that finds nothing changed correctly sends nothing, which is
     # indistinguishable from a broken notifier when you are testing.
     forced = os.environ.get("FORCE_PUSH", "").strip() in ("1", "true", "yes")
-    first = forced or prev.get("date") != datestr
-    if forced:
-        print("FORCE_PUSH set, sending the full board")
+    # A full board only when there is nothing to compare against, or when it is asked for.
+    # NOT on a date rollover, which is what this used to do: `prev.get("date") != datestr`
+    # meant every midnight reposted the whole board. CS2 carries a two-day horizon and
+    # soccer a seven-day one, so most fixtures survive the rollover unchanged and were being
+    # republished in full every morning at prices nobody had moved. A fixture should post
+    # once, then only when its price or its side actually changes.
+    #
+    # The cache still records the date, for reading the file by hand. It just no longer
+    # decides anything. Set FORCE_PUSH=1 to get a full board deliberately.
+    first = forced or not prev.get("board")
+    if first:
+        # Name the reason, because "the whole board reposted" has more than one cause and
+        # they need different fixes. A missing cache means push_cache.json is not being
+        # committed back from logs/, so every run looks like the first.
+        print("full board: " + ("FORCE_PUSH set" if forced
+                                else "no cache to compare against"))
     old = {} if first else prev.get("board", {})
 
     lines, keyed = [], []
@@ -115,7 +128,13 @@ def gate(logs_dir, datestr, board, tol=DEFAULT_TOL, cache_name=CACHE_NAME,
     # rather than changing. Without this the channel keeps a published pick for a fight
     # that will never happen, and nothing ever says otherwise. Measured 2026-08-08: two
     # UFC bouts were boarded, both opponents were swapped, and neither was withdrawn.
-    if not first:
+    # report_gone is OFF by default and only MMA should turn it on. A fighter withdrawing
+    # is real news: the bout is off, the pick is void, and nothing else says so. A team
+    # sport fixture leaving the board is never that -- the game started, and the pregame
+    # filter drops it by design. Reporting that fires on every game every day, trains the
+    # reader to skip the notice, buries the MMA case it exists for, and makes the board
+    # post something on every run when nothing has actually changed.
+    if not first and report_gone:
         # A fixture on the last board and not on this one has left for one of two reasons,
         # and they are not the same news.
         #
