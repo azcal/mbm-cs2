@@ -14202,3 +14202,6 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 180715,126437,2026-08-21T11:07:59.000+00:00,de_dust2,1,16.0,13.0,FUT Esports,MOUZ,finished
 180717,126438,2026-08-21T14:52:34.000+00:00,de_dust2,2,13.0,10.0,Legacy,Team Falcons,finished
 180718,126438,2026-08-21T13:53:24.000+00:00,de_mirage,1,13.0,7.0,Legacy,Team Falcons,finished
+180719,126439,2026-08-21T19:19:53.000+00:00,de_mirage,3,13.0,3.0,Team Spirit,Team Vitality,finished
+180720,126439,2026-08-21T17:53:11.000+00:00,de_nuke,2,16.0,14.0,Team Vitality,Team Spirit,finished
+180721,126439,2026-08-21T16:37:09.000+00:00,de_anubis,1,13.0,11.0,Team Spirit,Team Vitality,finished
