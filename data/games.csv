@@ -14205,3 +14205,6 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 180719,126439,2026-08-21T19:19:53.000+00:00,de_mirage,3,13.0,3.0,Team Spirit,Team Vitality,finished
 180720,126439,2026-08-21T17:53:11.000+00:00,de_nuke,2,16.0,14.0,Team Vitality,Team Spirit,finished
 180721,126439,2026-08-21T16:37:09.000+00:00,de_anubis,1,13.0,11.0,Team Spirit,Team Vitality,finished
+180722,126440,2026-08-22T16:11:00.000+00:00,de_dust2,3,16.0,13.0,FUT Esports,FURIA,finished
+180723,126440,2026-08-22T15:14:39.000+00:00,de_nuke,2,13.0,6.0,FURIA,FUT Esports,finished
+180724,126440,2026-08-22T14:09:31.000+00:00,de_ancient,1,13.0,11.0,FUT Esports,FURIA,finished
