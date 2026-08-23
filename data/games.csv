@@ -14210,3 +14210,6 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 180724,126440,2026-08-22T14:09:31.000+00:00,de_ancient,1,13.0,11.0,FUT Esports,FURIA,finished
 180726,126441,2026-08-22T19:09:02.000+00:00,de_ancient,2,13.0,9.0,Team Spirit,Legacy,finished
 180727,126441,2026-08-22T18:03:21.000+00:00,de_dust2,1,13.0,7.0,Team Spirit,Legacy,finished
+180728,126442,2026-08-23T10:22:27.000+00:00,de_dust2,3,13.0,9.0,Legacy,FURIA,finished
+180729,126442,2026-08-23T09:15:07.000+00:00,de_nuke,2,13.0,9.0,Legacy,FURIA,finished
+180730,126442,2026-08-23T08:08:01.000+00:00,de_ancient,1,13.0,9.0,FURIA,Legacy,finished
