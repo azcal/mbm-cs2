@@ -14235,3 +14235,5 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 182094,127390,2026-08-27T12:03:45.000+00:00,de_cache,1,13.0,4.0,MOUZ,9z,finished
 182090,127389,2026-08-27T10:02:54.000+00:00,de_cache,2,16.0,13.0,Inner Circle,Vitality,finished
 182091,127389,2026-08-27T09:02:47.000+00:00,de_anubis,1,13.0,8.0,Inner Circle,Vitality,finished
+182066,127381,2026-08-28T10:02:21.000+00:00,de_mirage,2,16.0,12.0,Aurora,DENDELE,finished
+182067,127381,2026-08-28T09:02:08.000+00:00,de_cache,1,13.0,7.0,Aurora,DENDELE,finished
