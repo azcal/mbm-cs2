@@ -14339,3 +14339,7 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 182127,127401,2026-09-04T14:08:10.000+00:00,de_inferno,1,13.0,6.0,Falcons,G2,finished
 182291,127512,2026-09-04T19:33:37.000+00:00,de_dust2,2,19.0,17.0,HEROIC,Nuclear TigeRES,finished
 182292,127512,2026-09-04T18:43:10.000+00:00,de_ancient,1,13.0,6.0,HEROIC,Nuclear TigeRES,finished
+182135,127404,2026-09-05T18:01:30.000+00:00,de_mirage,2,13.0,7.0,MOUZ,Vitality,finished
+182136,127404,2026-09-05T16:52:52.000+00:00,de_dust2,1,13.0,11.0,MOUZ,Vitality,finished
+182132,127403,2026-09-05T15:05:58.000+00:00,de_ancient,2,13.0,11.0,Spirit,Falcons,finished
+182133,127403,2026-09-05T14:04:36.000+00:00,de_nuke,1,13.0,8.0,Spirit,Falcons,finished
