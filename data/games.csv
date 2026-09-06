@@ -14343,3 +14343,7 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 182136,127404,2026-09-05T16:52:52.000+00:00,de_dust2,1,13.0,11.0,MOUZ,Vitality,finished
 182132,127403,2026-09-05T15:05:58.000+00:00,de_ancient,2,13.0,11.0,Spirit,Falcons,finished
 182133,127403,2026-09-05T14:04:36.000+00:00,de_nuke,1,13.0,8.0,Spirit,Falcons,finished
+182138,127405,2026-09-06T17:22:22.000+00:00,de_nuke,4,13.0,6.0,Spirit,MOUZ,finished
+182139,127405,2026-09-06T16:19:22.000+00:00,de_ancient,3,13.0,3.0,Spirit,MOUZ,finished
+182140,127405,2026-09-06T15:09:02.000+00:00,de_mirage,2,13.0,11.0,MOUZ,Spirit,finished
+182141,127405,2026-09-06T14:03:55.000+00:00,de_dust2,1,13.0,8.0,Spirit,MOUZ,finished
