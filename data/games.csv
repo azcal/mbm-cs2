@@ -14468,3 +14468,6 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 184715,129016,2026-09-12T06:03:00.000+00:00,de_nuke,1,13.0,10.0,LEGACY,MIBR,finished
 185192,129210,2026-09-12T15:14:31.000+00:00,de_mirage,2,13.0,9.0,HOTU,100 Thieves,finished
 185193,129210,2026-09-12T14:06:26.000+00:00,de_anubis,1,13.0,8.0,HOTU,100 Thieves,finished
+185194,129211,2026-09-12T19:24:58.000+00:00,de_mirage,3,13.0,9.0,HEROIC,1W,finished
+185195,129211,2026-09-12T18:21:42.000+00:00,de_dust2,2,13.0,9.0,1W,HEROIC,finished
+185196,129211,2026-09-12T17:09:00.000+00:00,de_ancient,1,13.0,10.0,HEROIC,1W,finished
