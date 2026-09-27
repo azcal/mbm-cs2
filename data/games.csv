@@ -14580,3 +14580,6 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 186298,129831,2026-09-26T16:57:21.000+00:00,de_inferno,3,13.0,0.0,Ninjas in Pyjamas,SINNERS,finished
 186299,129831,2026-09-26T16:05:12.000+00:00,de_cache,2,13.0,7.0,Ninjas in Pyjamas,SINNERS,finished
 186300,129831,2026-09-26T15:01:43.000+00:00,de_ancient,1,13.0,10.0,SINNERS,Ninjas in Pyjamas,finished
+186301,129832,2026-09-26T20:19:45.000+00:00,de_ancient,3,19.0,17.0,MAGIC,GamerLegion,finished
+186302,129832,2026-09-26T19:14:30.000+00:00,de_cache,2,13.0,8.0,GamerLegion,MAGIC,finished
+186303,129832,2026-09-26T18:13:03.000+00:00,de_dust2,1,13.0,6.0,MAGIC,GamerLegion,finished
