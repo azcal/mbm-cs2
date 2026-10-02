@@ -14609,3 +14609,8 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 185513,129370,2026-10-01T17:46:40.000+00:00,de_nuke,3,13.0,10.0,Alliance,Astralis,finished
 185514,129370,2026-10-01T16:53:10.000+00:00,de_cache,2,13.0,5.0,Astralis,Alliance,finished
 185515,129370,2026-10-01T15:26:45.000+00:00,de_inferno,1,16.0,14.0,Alliance,Astralis,finished
+185519,129372,2026-10-02T14:15:38.000+00:00,de_cache,3,13.0,9.0,Astralis,FaZe,finished
+185520,129372,2026-10-02T13:10:11.000+00:00,de_nuke,2,13.0,11.0,FaZe,Astralis,finished
+185521,129372,2026-10-02T12:10:04.000+00:00,de_ancient,1,13.0,11.0,Astralis,FaZe,finished
+185523,129373,2026-10-02T10:51:50.000+00:00,de_mirage,2,13.0,11.0,fnatic,B8,finished
+185524,129373,2026-10-02T10:00:23.000+00:00,de_cache,1,13.0,9.0,fnatic,B8,finished
