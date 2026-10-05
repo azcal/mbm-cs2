@@ -14672,3 +14672,23 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 187768,130767,2026-10-04T16:05:28.000+00:00,de_mirage,3,13.0,8.0,1win,G2 Esports,finished
 187769,130767,2026-10-04T15:15:02.000+00:00,de_ancient,2,13.0,1.0,G2 Esports,1win,finished
 187770,130767,2026-10-04T14:01:08.000+00:00,de_dust2,1,13.0,11.0,1win,G2 Esports,finished
+187801,130778,2026-10-05T19:22:09.000+00:00,de_anubis,3,13.0,8.0,Aurora Gaming,BetBoom Team,finished
+187798,130777,2026-10-05T18:32:52.000+00:00,de_mirage,3,13.0,4.0,Aurora Gaming,BetBoom Team,finished
+187802,130778,2026-10-05T18:19:08.000+00:00,de_nuke,2,13.0,7.0,BetBoom Team,Aurora Gaming,finished
+187799,130777,2026-10-05T17:39:01.000+00:00,de_dust2,2,13.0,4.0,Team Vitality,Team Falcons,finished
+187803,130778,2026-10-05T17:23:03.000+00:00,de_mirage,1,13.0,4.0,Aurora Gaming,BetBoom Team,finished
+187800,130777,2026-10-05T16:30:56.000+00:00,de_anubis,1,13.0,9.0,Team Falcons,Team Vitality,finished
+187795,130776,2026-10-05T16:16:05.000+00:00,de_anubis,3,13.0,8.0,M80,TYLOO,finished
+187793,130775,2026-10-05T15:20:08.000+00:00,de_mirage,2,13.0,11.0,MOUZ,Team Spirit,finished
+187796,130776,2026-10-05T15:13:57.000+00:00,de_cache,2,13.0,7.0,M80,TYLOO,finished
+187794,130775,2026-10-05T14:23:59.000+00:00,de_dust2,1,13.0,5.0,MOUZ,Team Spirit,finished
+187797,130776,2026-10-05T14:01:18.000+00:00,de_mirage,1,13.0,10.0,TYLOO,M80,finished
+187787,130773,2026-10-05T13:19:20.000+00:00,de_cache,2,13.0,6.0,Natus Vincere,9z Globant,finished
+187790,130774,2026-10-05T12:32:55.000+00:00,de_ancient,2,13.0,8.0,1win,Legacy,finished
+187788,130773,2026-10-05T12:22:57.000+00:00,de_nuke,1,13.0,6.0,Natus Vincere,9z Globant,finished
+187791,130774,2026-10-05T11:30:56.000+00:00,de_dust2,1,13.0,8.0,1win,Legacy,finished
+187783,130772,2026-10-05T11:04:14.000+00:00,de_inferno,3,13.0,10.0,FURIA,PARIVISION,finished
+187784,130772,2026-10-05T10:03:59.000+00:00,de_mirage,2,13.0,5.0,FURIA,PARIVISION,finished
+187781,130771,2026-10-05T10:00:48.000+00:00,de_ancient,2,13.0,9.0,G2 Esports,ShindeN,finished
+187785,130772,2026-10-05T09:01:50.000+00:00,de_ancient,1,13.0,7.0,PARIVISION,FURIA,finished
+187782,130771,2026-10-05T09:00:55.000+00:00,de_dust2,1,13.0,6.0,G2 Esports,ShindeN,finished
