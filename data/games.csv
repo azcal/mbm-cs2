@@ -14742,3 +14742,8 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 189489,131662,2026-10-14T19:09:09.000+00:00,de_ancient,1,13.0,10.0,FURIA,BetBoom,finished
 189485,131661,2026-10-14T16:54:19.000+00:00,de_mirage,2,16.0,14.0,Legacy,PARIVISION,finished
 189486,131661,2026-10-14T15:43:18.000+00:00,de_dust2,1,13.0,11.0,Legacy,PARIVISION,finished
+189505,131668,2026-10-15T13:37:20.000+00:00,de_dust2,3,13.0,9.0,FALCONS,9Z,finished
+189506,131668,2026-10-15T12:38:00.000+00:00,de_mirage,2,13.0,8.0,9Z,FALCONS,finished
+189507,131668,2026-10-15T11:32:07.000+00:00,de_nuke,1,13.0,9.0,FALCONS,9Z,finished
+189509,131669,2026-10-15T09:29:05.000+00:00,de_dust2,2,13.0,7.0,Aurora,Ninjas in Pyjamas,finished
+189510,131669,2026-10-15T08:30:30.000+00:00,de_cache,1,13.0,9.0,Aurora,Ninjas in Pyjamas,finished
