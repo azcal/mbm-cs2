@@ -14750,3 +14750,6 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 189493,131664,2026-10-15T17:21:20.000+00:00,de_mirage,3,13.0,7.0,BetBoom,PARIVISION,finished
 189494,131664,2026-10-15T16:27:33.000+00:00,de_anubis,2,13.0,4.0,BetBoom,PARIVISION,finished
 189495,131664,2026-10-15T15:12:05.000+00:00,de_ancient,1,13.0,10.0,PARIVISION,BetBoom,finished
+189490,131663,2026-10-15T20:57:02.000+00:00,de_mirage,3,13.0,8.0,FURIA,LEGACY,finished
+189491,131663,2026-10-15T19:58:38.000+00:00,de_inferno,2,13.0,5.0,FURIA,LEGACY,finished
+189492,131663,2026-10-15T18:50:44.000+00:00,de_cache,1,13.0,10.0,LEGACY,FURIA,finished
