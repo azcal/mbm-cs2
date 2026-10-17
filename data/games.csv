@@ -14755,3 +14755,6 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 189492,131663,2026-10-15T18:50:44.000+00:00,de_cache,1,13.0,10.0,LEGACY,FURIA,finished
 189512,131670,2026-10-16T15:27:23.000+00:00,de_inferno,2,13.0,4.0,AURORA,9Z,finished
 189513,131670,2026-10-16T14:14:01.000+00:00,de_cache,1,13.0,11.0,AURORA,9Z,finished
+189496,131665,2026-10-16T19:34:14.000+00:00,de_mirage,3,13.0,11.0,BB Team,LEGACY,finished
+189497,131665,2026-10-16T18:24:32.000+00:00,de_dust2,2,13.0,11.0,LEGACY,BB Team,finished
+189498,131665,2026-10-16T16:59:25.000+00:00,de_nuke,1,16.0,13.0,BB Team,LEGACY,finished
