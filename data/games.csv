@@ -14763,3 +14763,6 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 189517,131672,2026-10-17T19:20:50.000+00:00,de_mirage,3,13.0,7.0,BetBoom,Falcons,finished
 189518,131672,2026-10-17T17:56:20.000+00:00,de_dust2,2,16.0,14.0,BetBoom,Falcons,finished
 189519,131672,2026-10-17T17:00:19.000+00:00,de_anubis,1,13.0,5.0,Falcons,BetBoom,finished
+189520,131673,2026-10-18T14:12:36.000+00:00,de_nuke,3,13.0,9.0,AURORA,FALCONS,finished
+189521,131673,2026-10-18T12:31:23.000+00:00,de_dust2,2,19.0,17.0,AURORA,FALCONS,finished
+189522,131673,2026-10-18T11:29:42.000+00:00,de_anubis,1,13.0,8.0,FALCONS,AURORA,finished
