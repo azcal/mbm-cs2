@@ -14946,3 +14946,13 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 190999,132573,2026-11-02T03:01:24.000+00:00,de_dust2,2,13.0,7.0,HEROIC,B8 Esports,finished
 191000,132573,2026-11-02T02:08:09.000+00:00,de_nuke,1,13.0,4.0,HEROIC,B8 Esports,finished
 191003,132574,2026-11-02T02:05:41.000+00:00,de_mirage,1,16.0,13.0,Legacy,The MongolZ,finished
+191005,132575,2026-11-02T12:45:35.000+00:00,de_mirage,2,13.0,11.0,Natus Vincere,Team Falcons,finished
+191006,132575,2026-11-02T11:50:41.000+00:00,de_ancient,1,13.0,5.0,Natus Vincere,Team Falcons,finished
+191020,132580,2026-11-02T11:15:36.000+00:00,de_nuke,2,13.0,7.0,MOUZ,TYLOO,finished
+191007,132576,2026-11-02T10:50:35.000+00:00,de_cache,3,13.0,4.0,FURIA,FaZe Clan,finished
+191021,132580,2026-11-02T10:17:39.000+00:00,de_inferno,1,13.0,6.0,MOUZ,TYLOO,finished
+191008,132576,2026-11-02T09:53:32.000+00:00,de_dust2,2,13.0,5.0,FURIA,FaZe Clan,finished
+191016,132579,2026-11-02T09:12:31.000+00:00,de_mirage,3,13.0,9.0,BB TEAM,9z Globant,finished
+191009,132576,2026-11-02T08:51:33.000+00:00,de_ancient,1,13.0,11.0,FaZe Clan,FURIA,finished
+191017,132579,2026-11-02T08:20:16.000+00:00,de_ancient,2,13.0,7.0,BB Team,9z Globant,finished
+191018,132579,2026-11-02T07:16:01.000+00:00,de_dust2,1,13.0,8.0,9z Globant,BB TEAM,finished
