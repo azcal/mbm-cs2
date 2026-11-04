@@ -14976,3 +14976,11 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 192037,133037,2026-11-03T08:14:51.000+00:00,de_inferno,1,13.0,7.0,The MongolZ,HEROIC,finished
 192039,133038,2026-11-03T07:52:34.000+00:00,de_anubis,2,13.0,10.0,FaZe Clan,Team Falcons,finished
 192040,133038,2026-11-03T07:03:36.000+00:00,de_ancient,1,13.0,3.0,Team Falcons,FaZe Clan,finished
+192045,133040,2026-11-04T05:36:46.000+00:00,de_dust2,2,13.0,6.0,Team Falcons,HEROIC,finished
+192048,133041,2026-11-04T05:34:32.000+00:00,de_dust2,2,13.0,11.0,Natus Vincere,B8 Esports,finished
+192046,133040,2026-11-04T04:33:42.000+00:00,de_ancient,1,13.0,8.0,Team Falcons,HEROIC,finished
+192049,133041,2026-11-04T04:33:34.000+00:00,de_ancient,1,13.0,8.0,Natus Vincere,B8 Esports,finished
+192072,133049,2026-11-04T03:06:39.000+00:00,de_anubis,2,13.0,4.0,Team Liquid,TYLOO,finished
+192069,133048,2026-11-04T03:02:49.000+00:00,de_cache,2,13.0,5.0,BB TEAM,Aurora Gaming,finished
+192070,133048,2026-11-04T02:04:22.000+00:00,de_mirage,1,13.0,5.0,BB TEAM,Aurora Gaming,finished
+192073,133049,2026-11-04T02:03:47.000+00:00,de_mirage,1,13.0,11.0,Team Liquid,TYLOO,finished
