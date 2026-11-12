@@ -15025,3 +15025,9 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 191046,132591,2026-11-12T04:07:32.000+00:00,de_inferno,1,0.0,,,,finished
 191042,132590,2026-11-12T03:10:19.000+00:00,de_mirage,2,0.0,,,,finished
 191043,132590,2026-11-12T02:01:06.000+00:00,de_dust2,1,0.0,,,,finished
+191056,132595,2026-11-12T13:06:26.000+00:00,de_ancient,3,13.0,5.0,Spirit,G2,finished
+191057,132595,2026-11-12T11:52:40.000+00:00,de_nuke,2,13.0,6.0,Spirit,G2,finished
+191058,132595,2026-11-12T10:44:33.000+00:00,de_mirage,1,13.0,9.0,G2,Spirit,finished
+191053,132594,2026-11-12T09:56:18.000+00:00,de_nuke,3,13.0,4.0,MOUZ,FUT,finished
+191054,132594,2026-11-12T08:33:16.000+00:00,de_mirage,2,16.0,14.0,MOUZ,FUT,finished
+191055,132594,2026-11-12T06:59:20.000+00:00,de_cache,1,19.0,16.0,FUT,MOUZ,finished
