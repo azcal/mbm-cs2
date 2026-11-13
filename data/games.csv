@@ -15031,3 +15031,8 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 191053,132594,2026-11-12T09:56:18.000+00:00,de_nuke,3,13.0,4.0,MOUZ,FUT,finished
 191054,132594,2026-11-12T08:33:16.000+00:00,de_mirage,2,16.0,14.0,MOUZ,FUT,finished
 191055,132594,2026-11-12T06:59:20.000+00:00,de_cache,1,19.0,16.0,FUT,MOUZ,finished
+191062,132597,2026-11-13T13:18:17.000+00:00,de_anubis,3,13.0,8.0,Falcons,G2,finished
+191063,132597,2026-11-13T12:20:03.000+00:00,de_mirage,2,13.0,2.0,Falcons,G2,finished
+191064,132597,2026-11-13T11:01:51.000+00:00,de_dust2,1,13.0,11.0,G2,Falcons,finished
+191060,132596,2026-11-13T09:06:24.000+00:00,de_cache,2,16.0,14.0,MOUZ,Vitality,finished
+191061,132596,2026-11-13T08:03:22.000+00:00,de_mirage,1,13.0,8.0,MOUZ,Vitality,finished
