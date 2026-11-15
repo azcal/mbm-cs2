@@ -15040,3 +15040,6 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 191070,132599,2026-11-14T10:48:52.000+00:00,de_ancient,1,16.0,14.0,FURIA,Falcons,finished
 191066,132598,2026-11-14T09:02:07.000+00:00,de_ancient,2,13.0,11.0,Spirit,MOUZ,finished
 191067,132598,2026-11-14T08:01:26.000+00:00,de_mirage,1,13.0,7.0,Spirit,MOUZ,finished
+191073,132600,2026-11-15T10:16:07.000+00:00,de_mirage,3,13.0,8.0,FURIA,Spirit,finished
+191074,132600,2026-11-15T09:16:57.000+00:00,de_dust2,2,13.0,5.0,FURIA,Spirit,finished
+191075,132600,2026-11-15T08:05:35.000+00:00,de_ancient,1,13.0,11.0,FURIA,Spirit,finished
