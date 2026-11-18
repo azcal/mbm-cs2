@@ -15049,3 +15049,6 @@ id,match_id,begin_at,map_name,number,winner_clan_score,loser_clan_score,winner_c
 193072,133480,2026-11-17T13:00:51.000+00:00,de_nuke,1,13.0,11.0,Sangal,BIG,finished
 193068,133479,2026-11-17T11:53:50.000+00:00,de_mirage,2,13.0,9.0,IC Esports,Betclic,finished
 193069,133479,2026-11-17T11:00:31.000+00:00,de_nuke,1,13.0,5.0,IC Esports,Betclic,finished
+193076,133482,2026-11-17T19:44:13.000+00:00,de_cache,3,13.0,9.0,Luminosity,GamerLegion,finished
+193077,133482,2026-11-17T18:41:03.000+00:00,de_nuke,2,13.0,7.0,GamerLegion,Luminosity,finished
+193078,133482,2026-11-17T17:30:12.000+00:00,de_mirage,1,16.0,14.0,Luminosity,GamerLegion,finished
