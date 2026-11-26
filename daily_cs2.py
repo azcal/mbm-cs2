@@ -97,6 +97,14 @@ def refresh_matches():
             "filter[matches.tier][in]": "s,a"}).json()
         res = r.get("results", [])
         if not res:
+            # Finished tier S/A matches always exist, so an empty first page is the API
+            # refusing or changing shape, not a quiet week. This used to fall through as
+            # "+0 new" and the board would price on whatever history was already stored.
+            if page == 0:
+                print("MBM-CHECK FAIL source | CS2: bo3.gg returned no finished matches "
+                      f"on the first page ({str(r)[:120]})")
+                if os.environ.get("MBM_ALLOW_STALE", "").strip() not in ("1", "true", "yes"):
+                    raise SystemExit("CS2: refusing to board, the results feed did not answer")
             break
         hits = 0
         for x in res:
@@ -311,12 +319,25 @@ def team_names(ids):
 
 
 def run():
+    print(f"MBM-CHECK BEGIN CS2 {dt.date.today()}")
     m = refresh_matches()
     g = refresh_games(m)
     by_mid = build_map_index(m, g)
     elo, gaps = compute_elo(m, by_mid)
     mw, base_w = fit_head(m, gaps)
     up = fetch_upcoming()
+    # History age against the slate. A gap between tournaments is normal, so old history
+    # alone is only a warning; old history WITH matches about to be priced is the failure.
+    _newest = pd.to_datetime(m.date, utc=True).max()
+    _age = (pd.Timestamp.now(tz="UTC") - _newest).days
+    if up and _age > 10:
+        print(f"MBM-CHECK FAIL freshness | CS2: {len(up)} match(es) to price but the newest "
+              f"finished match in history is {_age} days old ({_newest:%Y-%m-%d})")
+        if os.environ.get("MBM_ALLOW_STALE", "").strip() not in ("1", "true", "yes"):
+            raise SystemExit("CS2: refusing to board on stale data")
+    else:
+        print(f"MBM-CHECK {'OK' if _age <= 10 else 'WARN'} freshness | CS2: history through "
+              f"{_newest:%Y-%m-%d} ({_age}d), {len(up)} upcoming")
     tn = team_names(set(m.team1_id) | set(m.team2_id) |
                     {x["team1_id"] for x in up} | {x["team2_id"] for x in up})
 
